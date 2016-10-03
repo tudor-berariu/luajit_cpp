@@ -23,6 +23,25 @@ void SimpleClass::subtract(const int z) {
   this->_x -= z;
 }
 
+SimpleAnswer SimpleClass::getAnswer() const {
+  SimpleAnswer ans;
+  ans._y = this->_x;
+  return ans;
+}
+
+ComplexAnswer SimpleClass::getArray() const {
+  ComplexAnswer ans;
+  ans._y = this->_x;
+  ans._t = (int*) malloc(sizeof(int) * ans._y);
+  for (int i = 1; i <= ans._y; i++) {
+    ans._t[i] = -i;
+  }
+  for (int j = 0; j < 10; j++) {
+    ans._z[j] = j * j;
+  }
+  return ans;
+}
+
 // C functions
 
 SimpleClass *SimpleClass_SimpleClass() {
@@ -43,4 +62,12 @@ void SimpleClass_add(SimpleClass* _this, int z){
 
 void SimpleClass_subtract(SimpleClass* _this, int z){
   _this->subtract(z);
+}
+
+SimpleAnswer SimpleClass_getAnswer(SimpleClass* _this) {
+  return _this->getAnswer();
+}
+
+ComplexAnswer SimpleClass_getArray(SimpleClass* _this) {
+  return _this->getArray();
 }
